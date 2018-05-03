@@ -13,7 +13,7 @@ namespace RestaurantReviewsLibrary.Interfaces
         string Location { get; }
         int ReviewCount { get; }
 
-        void SubmitReview(string name, int rating, string desc);
+        void AddReview(string name, int rating, string desc);
         IEnumerable<IReview> GetAllReviews();
     }
 }

@@ -45,8 +45,8 @@ namespace RestaurantReviewsLibrary.Models.Tests
             string expLocation = "4568 Main Street";
             double expRating = 2.5;
             RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
-            testObj.SubmitReview("Reviewer1", 4);
-            testObj.SubmitReview("Reviewer1", 1, "Review Description");
+            testObj.AddReview("Reviewer1", 4);
+            testObj.AddReview("Reviewer1", 1, "Review Description");
 
             double actualVal = testObj.GetAverageRating;
 
@@ -63,7 +63,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
             string expDesc = "";
             RestaurantInfo rest = new RestaurantInfo("name", "loc");
 
-            rest.SubmitReview(expReviewerName, expRating);
+            rest.AddReview(expReviewerName, expRating);
             
             Assert.IsTrue(rest.ReviewCount > 0);
         }
@@ -90,11 +90,11 @@ namespace RestaurantReviewsLibrary.Models.Tests
             string expName = "Restaurant1";
             string expLocation = "123 One St.";
             RestaurantInfo rest = new RestaurantInfo(expName, expLocation);
-            rest.SubmitReview("Reviewer1", 5);
-            rest.SubmitReview("Reviewer2", 4);
-            rest.SubmitReview("Reviewer3", 3);
-            rest.SubmitReview("Reviewer4", 2);
-            rest.SubmitReview("Reviewer5", 1);
+            rest.AddReview("Reviewer1", 5);
+            rest.AddReview("Reviewer2", 4);
+            rest.AddReview("Reviewer3", 3);
+            rest.AddReview("Reviewer4", 2);
+            rest.AddReview("Reviewer5", 1);
 
             var l = rest.GetAllReviews();
 

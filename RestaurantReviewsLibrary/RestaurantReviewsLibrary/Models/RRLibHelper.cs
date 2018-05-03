@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using RestaurantReviewsLibrary.Interfaces;
-using System.Xml.Serialization;
-using System.IO;
 using DataAccessLayer;
 
 namespace RestaurantReviewsLibrary.Models

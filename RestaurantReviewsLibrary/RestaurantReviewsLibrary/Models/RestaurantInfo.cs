@@ -64,7 +64,7 @@ namespace RestaurantReviewsLibrary.Models
         }
 
         // Methods
-        public void SubmitReview(string name, int rating, string description = "")
+        public void AddReview(string name, int rating, string description = "")
         {
             Review r = new Review(rating, name, DateTime.Now, description);
             ListOfReviews.Add(r);
