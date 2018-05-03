@@ -11,7 +11,7 @@ using DataAccessLayer;
 
 namespace RestaurantReviewsLibrary.Models
 {
-    public class RestaurantsInfo : IRestaurantsInfo
+    public class RRLibHelper : IRestaurantsInfo
     {
         private static RRCrud crud = new RRCrud();
         // ----------
@@ -30,7 +30,7 @@ namespace RestaurantReviewsLibrary.Models
         // ------------
         // Constructors
         // ------------
-        public RestaurantsInfo()
+        public RRLibHelper()
         {
             _myList = new List<RestaurantInfo>();
             GetSerializedData();

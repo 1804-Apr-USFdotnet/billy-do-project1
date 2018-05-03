@@ -14,7 +14,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void RestaurantsInfoConstructorTest()
         {
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             int expected = 51;
             int expectedReviewCount = 7;// total = 188;
 
@@ -30,7 +30,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         public void GetTopRestaurantsTest()
         {
             // Dummy Data: Franklin BBQ, Pizza Place (Tallahassee), Checkers
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             string first = "Rath, Stehr and O'Connell";
             string second = "Schiller LLC";
             string secondLocation = "Old Shore";
@@ -48,7 +48,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void GetAllRestaurantsTest()
         {
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             int expectedRestaurantCount = 51;
 
             var a = infoObj.GetAllRestaurants();
@@ -63,7 +63,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void GetAllReviewsTest()
         {
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             int expectedReviewCount = 188;
 
             var actualReviews = infoObj.GetAllReviews();
@@ -74,7 +74,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void SearchRestaurantTest1()
         {
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             string expectedRestName = "Thiel LLC";
             int expectedCount = 1;
 
@@ -88,7 +88,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
         public void SearchRestaurantTest2()
         {
             string restPartialName = "Jo";
-            RestaurantsInfo infoObj = new RestaurantsInfo();
+            RRLibHelper infoObj = new RRLibHelper();
             string expectedRestName1 = "Jones Group";
             string expectedRestName2 = "Johns Group";
             string expectedRestName3 = "Jones LLC";

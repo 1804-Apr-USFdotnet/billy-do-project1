@@ -47,10 +47,3 @@ namespace DataAccessLayer
         public int RestaurantId { get; set; }
         public virtual Restaurant Restaurant { get; set; }
     }
-
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
-}
