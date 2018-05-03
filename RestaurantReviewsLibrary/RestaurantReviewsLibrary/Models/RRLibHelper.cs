@@ -11,9 +11,10 @@ using DataAccessLayer;
 
 namespace RestaurantReviewsLibrary.Models
 {
-    public class RRLibHelper : IRestaurantsInfo
+    public class RRLibHelper : IRRLibHelper
     {
         private static RRCrud crud = new RRCrud();
+        private DataSource _datasrc;
         // ----------
         // Properties
         // ----------
@@ -30,13 +31,14 @@ namespace RestaurantReviewsLibrary.Models
         // ------------
         // Constructors
         // ------------
-        public RRLibHelper()
+        public RRLibHelper(DataSource src = DataSource.InputDb)
         {
+            _datasrc = src;
             _myList = new List<RestaurantInfo>();
             GetSerializedData();
-            MySerializer.Serialize(ref _myList);
 
-            OutputToRRDb();
+            MySerializer.Serialize(ref _myList);
+            OutputData();
         }
 
         // -------
@@ -50,59 +52,80 @@ namespace RestaurantReviewsLibrary.Models
 
         private void GetSerializedData()
         {
-            try
+            if ((_datasrc & DataSource.InputDb) > 0)
             {
-                var restList = crud.GetAllRestarurants();
-                var reviewList = crud.GetAllReviews();
-                foreach (var restaurant in restList)
+                // get from database
+                try
                 {
-                    var restInfo = new RestaurantInfo(restaurant);
-                    var shortList = reviewList.Where((r) => r.RestaurantId == restaurant.Id).ToList();
-                    foreach (var review in shortList)
+                    var restList = crud.GetAllRestarurants();
+                    var reviewList = crud.GetAllReviews();
+                    foreach (var restaurant in restList)
                     {
-                        restInfo.ListOfReviews.Add(new Review(review));
+                        var restInfo = new RestaurantInfo(restaurant);
+                        var shortList = reviewList.Where((r) => r.RestaurantId == restaurant.Id).ToList();
+                        foreach (var review in shortList)
+                        {
+                            restInfo.ListOfReviews.Add(new Review(review));
+                        }
+                        _myList.Add(restInfo);
                     }
-                    _myList.Add(restInfo);
                 }
-            }
-            catch (Exception e)
-            {
-                // TODO: Log database error
-            }
-
-            if (_myList.Count() == 0)
+                catch (Exception e)
+                {
+                    // TODO: Log database error
+                }
+            } 
+            else if ((_datasrc & DataSource.InputXml) > 0)
             {
                 MySerializer.Deserialize(ref _myList);
+            }
+            else
+            {
+                // Did not choose any input!!!
+                // TODO Log error?
             }
             
         }
 
-        private void OutputToRRDb()
+        private void OutputData()
         {
-            //TODO: figure out how to NOT input data if data already exists in DB
-            try
+            if ((_datasrc & DataSource.OutputDb) > 0)
             {
-                var a = crud.GetAllRestarurants();
-                if (a.Count() <= 0)
+                // store in database
+                //TODO: figure out how to NOT input data if data already exists in DB
+                try
                 {
-                    foreach (var item in _myList)
+                    var a = crud.GetAllRestarurants();
+                    if (a.Count() <= 0)
                     {
-                        int restId = crud.CreateRestaurant(item.Name, item.Location);
-                        item.RestaurantId = restId;
-
-                        foreach (var review in item.ListOfReviews)
+                        foreach (var item in _myList)
                         {
-                            review.RestaurantId = restId;
-                            int reviewId = crud.CreateReview(review.Rating, review.ReviewerName,
-                                review.Description, review.DateCreated, restId);
-                            review.ReviewId = reviewId;
+                            int restId = crud.CreateRestaurant(item.Name, item.Location).Id;
+                            item.RestaurantId = restId;
+
+                            foreach (var review in item.ListOfReviews)
+                            {
+                                review.RestaurantId = restId;
+                                int reviewId = crud.CreateReview(review.Rating, review.ReviewerName,
+                                    review.Description, review.DateCreated, restId).Id;
+                                review.ReviewId = reviewId;
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    //TODO: Logging
+                }
             }
-            catch (Exception e)
+            else if ((_datasrc & DataSource.OutputXml) > 0)
             {
-                //TODO: Logging
+                MySerializer.Serialize(ref _myList);
+            }
+            else
+            {
+                // Did not choose to output
+                // TODO Log info, for all choices
             }
         }
 
@@ -148,4 +171,6 @@ namespace RestaurantReviewsLibrary.Models
             return obj;
         }
     }
+
+    public enum DataSource { InputDb = 1, InputXml = 2, OutputDb = 4, OutputXml = 8};
 }

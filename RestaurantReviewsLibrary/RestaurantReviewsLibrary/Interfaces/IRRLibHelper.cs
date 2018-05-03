@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RestaurantReviewsLibrary.Interfaces
 {
-    public interface IRestaurantsInfo
+    public interface IRRLibHelper
     {
         IEnumerable<IRestaurantInfo> GetTopRestaurants(int n);
         IEnumerable<IRestaurantInfo> GetTopThreeRestaurants();
