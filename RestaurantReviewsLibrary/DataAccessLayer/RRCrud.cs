@@ -15,8 +15,9 @@ namespace DataAccessLayer
         // CRUD Methods
         // ============
 
+        // ------
         // Create
-        public int CreateRestaurant(string name, string loc) 
+        public Restaurant CreateRestaurant(string name, string loc) 
         {
             var restaurant = db.Restaurants.Create();
             restaurant.Name = name;
@@ -24,10 +25,10 @@ namespace DataAccessLayer
 
             db.Restaurants.Add(restaurant);
             db.SaveChanges();
-            return restaurant.Id;
+            return restaurant;
         }
 
-        public int CreateReview(int rating, string user, string desc, DateTime created, int restid) 
+        public Review CreateReview(int rating, string user, string desc, DateTime created, int restid) 
         {
             var review = db.Reviews.Create();
             review.Rating = rating;
@@ -39,13 +40,13 @@ namespace DataAccessLayer
 
             db.Reviews.Add(review);
             db.SaveChanges();
-            return review.Id;
+            return review;
         }
 
-        //Read
+        // ----
+        // Read
         public Restaurant ReadRestaurant(int id)
         {
-            //TODO: test
             return db.Restaurants.Find(id);
         }
 
@@ -56,7 +57,6 @@ namespace DataAccessLayer
 
         public Review ReadReview(int id)
         {
-            // test
             return db.Reviews.Find(id);
         }
 
@@ -65,13 +65,54 @@ namespace DataAccessLayer
             return db.Reviews.ToList();
         }
 
+        // ------
         // Update
-
-        // Delete
-
-        public void SaveChanges()
+        public Restaurant UpdateRestaurant(int id, params string[] args)
         {
+            var r = ReadRestaurant(id);
+            r.Name = args[0];
+            r.Location = args[1];
             db.SaveChanges();
+            return r;
+
+        }
+
+        public Review UpdateReview(int id, params object[] args)
+        {
+            var r = ReadReview(id);
+            r.Rating = Convert.ToInt32(args[0]);
+            r.Description = (string)args[1];
+            // TODO: able to update other fields?
+
+            db.SaveChanges();
+            return r;
+        }
+
+        // ------
+        // Delete
+        public int DeleteRestaurant(int restId)
+        {
+            var r = ReadRestaurant(restId);
+            db.Restaurants.Remove(r);
+            var result = db.SaveChanges();
+
+            return result;
+            //TODO: Return removed Restaurant object?
+        }
+
+        public int DeleteReview(int reviewId)
+        {
+            var r = ReadReview(reviewId);
+            db.Reviews.Remove(r);
+            var result = db.SaveChanges();
+
+            return result;
+            //TODO: Return removed Restaurant object?
+        }
+
+        public int SaveChanges()
+        {
+            return db.SaveChanges();
         }
     }
 }
