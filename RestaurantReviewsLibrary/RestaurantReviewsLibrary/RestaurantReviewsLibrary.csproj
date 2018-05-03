@@ -52,12 +52,12 @@
     <Compile Include="Abstracts\BusinessDetails.cs" />
     <Compile Include="Abstracts\Details.cs" />
     <Compile Include="Interfaces\IRestaurantInfo.cs" />
-    <Compile Include="Interfaces\IRestaurantsInfo.cs" />
+    <Compile Include="Interfaces\IRRLibHelper.cs" />
     <Compile Include="Interfaces\IReview.cs" />
     <Compile Include="Models\Dummy.cs" />
     <Compile Include="Models\RestaurantInfo.cs" />
     <Compile Include="Models\RestaurantDetails.cs" />
-    <Compile Include="Models\RestaurantsInfo.cs" />
+    <Compile Include="Models\RRLibHelper.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MySerializer.cs" />

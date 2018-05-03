@@ -13,9 +13,8 @@ namespace RestaurantReviewsLibrary.Models
     {
         private static RRCrud crud = new RRCrud();
         private DataSource _datasrc;
-        // ----------
-        // Properties
-        // ----------
+
+        #region Properties
         protected List<RestaurantInfo> _myList;
 
         public IEnumerable<RestaurantInfo> ListOfRestaurants
@@ -25,23 +24,19 @@ namespace RestaurantReviewsLibrary.Models
                 return _myList;
             }
         }
+        #endregion
 
-        // ------------
-        // Constructors
-        // ------------
+        #region Constructors
         public RRLibHelper(DataSource src = DataSource.InputDb)
         {
             _datasrc = src;
             _myList = new List<RestaurantInfo>();
             GetSerializedData();
-
-            MySerializer.Serialize(ref _myList);
             OutputData();
         }
+        #endregion
 
-        // -------
-        // Methods
-        // -------
+        #region Methods
 
         internal void AddRestaurant(string name, string loc)
         {
@@ -168,6 +163,7 @@ namespace RestaurantReviewsLibrary.Models
             var obj = _myList.FindAll(c => c.Name.StartsWith(searchQuery, comparison));
             return obj;
         }
+        #endregion
     }
 
     public enum DataSource { InputDb = 1, InputXml = 2, OutputDb = 4, OutputXml = 8};
