@@ -8,11 +8,11 @@ namespace RestaurantReviewsLibrary.Interfaces
 {
     public interface IRRLibHelper
     {
-        IEnumerable<IRestaurantInfo> GetTopRestaurants(int n);
-        IEnumerable<IRestaurantInfo> GetTopThreeRestaurants();
-        IEnumerable<IRestaurantInfo> GetAllRestaurants();
-        IRestaurantInfo GetRestaurant(string name);
-        IEnumerable<IReview> GetAllReviews();
-        IEnumerable<IRestaurantInfo> SearchRestaurant(string searchQuery);
+        //IEnumerable<IRestaurantInfo> GetTopRestaurants(int n);
+        //IEnumerable<IRestaurantInfo> GetTopThreeRestaurants();
+        //IEnumerable<IRestaurantInfo> GetAllRestaurants();
+        //IRestaurantInfo GetRestaurant(string name);
+        //IEnumerable<IReview> GetAllReviews();
+        //IEnumerable<IRestaurantInfo> SearchRestaurant(string searchQuery);
     }
 }

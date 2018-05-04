@@ -16,7 +16,7 @@ namespace DataAccessLayer
         // If you wish to target a different database and/or database provider, modify the 'Model1' 
         // connection string in the application configuration file.
         public RRDb()
-            : base("name=RRDb")
+            : base("name=RRDb1")
         {
         }
 

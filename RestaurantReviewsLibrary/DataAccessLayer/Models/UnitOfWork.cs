@@ -12,9 +12,6 @@ namespace DataAccessLayer.Models
     class UnitOfWork : IUnitOfWork
     {
         private RRDb db;
-        public IRepository<Restaurant> Restaurants;
-
-        public IRepository<Review> Reviews;
 
         public UnitOfWork()
         {
@@ -22,6 +19,10 @@ namespace DataAccessLayer.Models
             //Restaurants = db.Restaurants;
 
         }
+
+        public IRepository<Restaurant> Restaurants => throw new NotImplementedException();
+
+        public IRepository<Review> Reviews => throw new NotImplementedException();
 
         public void Commit()
         {

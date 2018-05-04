@@ -58,6 +58,7 @@
     <Compile Include="Models\RestaurantInfoUnitTests.cs" />
     <Compile Include="Models\RRLibHelperUnitTests.cs" />
     <Compile Include="Models\ReviewUnitTests.cs" />
+    <Compile Include="Models\TestContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataAccessLayer\DataAccessLayer.csproj">
+      <Project>{65550cef-f5ed-4ca7-88d0-9c8ae085aeac}</Project>
+      <Name>DataAccessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RestaurantReviewsLibrary\RestaurantReviewsLibrary.csproj">
       <Project>{0fba6573-45da-4cfe-aaab-6e03050b528a}</Project>
       <Name>RestaurantReviewsLibrary</Name>

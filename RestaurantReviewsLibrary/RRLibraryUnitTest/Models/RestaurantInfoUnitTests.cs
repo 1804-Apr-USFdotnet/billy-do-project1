@@ -8,101 +8,101 @@ using System.Threading.Tasks;
 
 namespace RestaurantReviewsLibrary.Models.Tests
 {
-    [TestClass()]
-    public class RestaurantInfoUnitTests
-    {
-        [TestMethod()]
-        public void RestaurantInfoConstructorTest()
-        {
-            string expName = "Marv's Pizza Palace";
-            string expLocation = "789 Thisisa Street";
+    //[TestClass()]
+    //public class RestaurantInfoUnitTests
+    //{
+    //    [TestMethod()]
+    //    public void RestaurantInfoConstructorTest()
+    //    {
+    //        string expName = "Marv's Pizza Palace";
+    //        string expLocation = "789 Thisisa Street";
 
-            RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
+    //        RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
 
-            Assert.AreEqual(expName, testObj.Name);
-            Assert.AreEqual(expLocation, testObj.Location);
-        }
+    //        Assert.AreEqual(expName, testObj.Name);
+    //        Assert.AreEqual(expLocation, testObj.Location);
+    //    }
 
-        [TestMethod()]
-        public void RestaurantInfoGetAverageRatingTest1()
-        {
-            string expName = "Tatsuya Ramen";
-            string expLocation = "123 Fake St.";
-            double expRating = 0.0;
-            RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
+    //    [TestMethod()]
+    //    public void RestaurantInfoGetAverageRatingTest1()
+    //    {
+    //        string expName = "Tatsuya Ramen";
+    //        string expLocation = "123 Fake St.";
+    //        double expRating = 0.0;
+    //        RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
 
-            double actualVal = testObj.GetAverageRating;
+    //        double actualVal = testObj.GetAverageRating;
 
-            Assert.AreEqual(expName, testObj.Name);
-            Assert.AreEqual(expLocation, testObj.Location);
-            Assert.AreEqual(expRating, actualVal);
-        }
+    //        Assert.AreEqual(expName, testObj.Name);
+    //        Assert.AreEqual(expLocation, testObj.Location);
+    //        Assert.AreEqual(expRating, actualVal);
+    //    }
 
-        [TestMethod()]
-        public void RestaurantInfoGetAverageRatingTest2()
-        {
-            string expName = "TGIFridays";
-            string expLocation = "4568 Main Street";
-            double expRating = 2.5;
-            RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
-            testObj.AddReview("Reviewer1", 4);
-            testObj.AddReview("Reviewer1", 1, "Review Description");
+    //    [TestMethod()]
+    //    public void RestaurantInfoGetAverageRatingTest2()
+    //    {
+    //        string expName = "TGIFridays";
+    //        string expLocation = "4568 Main Street";
+    //        double expRating = 2.5;
+    //        RestaurantInfo testObj = new RestaurantInfo(expName, expLocation);
+    //        testObj.AddReview("Reviewer1", 4);
+    //        testObj.AddReview("Reviewer1", 1, "Review Description");
 
-            double actualVal = testObj.GetAverageRating;
+    //        double actualVal = testObj.GetAverageRating;
 
-            Assert.AreEqual(expName, testObj.Name);
-            Assert.AreEqual(expLocation, testObj.Location);
-            Assert.AreEqual(expRating, actualVal);
-        }
+    //        Assert.AreEqual(expName, testObj.Name);
+    //        Assert.AreEqual(expLocation, testObj.Location);
+    //        Assert.AreEqual(expRating, actualVal);
+    //    }
 
-        [TestMethod()]
-        public void SubmitReviewTest()
-        {
-            string expReviewerName = "Hanzo Lastname";
-            int expRating = 4;
-            string expDesc = "";
-            RestaurantInfo rest = new RestaurantInfo("name", "loc");
+    //    [TestMethod()]
+    //    public void SubmitReviewTest()
+    //    {
+    //        string expReviewerName = "Hanzo Lastname";
+    //        int expRating = 4;
+    //        string expDesc = "";
+    //        RestaurantInfo rest = new RestaurantInfo("name", "loc");
 
-            rest.AddReview(expReviewerName, expRating);
+    //        rest.AddReview(expReviewerName, expRating);
             
-            Assert.IsTrue(rest.ReviewCount > 0);
-        }
+    //        Assert.IsTrue(rest.ReviewCount > 0);
+    //    }
 
-        [TestMethod()]
-        public void GetAllReviewsTest1()
-        {
-            string expName = "Restaurant1";
-            string expLocation = "123 One St.";
-            RestaurantInfo rest = new RestaurantInfo(expName, expLocation);
+    //    [TestMethod()]
+    //    public void GetAllReviewsTest1()
+    //    {
+    //        string expName = "Restaurant1";
+    //        string expLocation = "123 One St.";
+    //        RestaurantInfo rest = new RestaurantInfo(expName, expLocation);
 
-            var l = rest.GetAllReviews();
+    //        var l = rest.GetAllReviews();
 
-            foreach (var review in l)
-            {
-                Assert.Fail();
-            }
-            Assert.IsTrue(l.Count() == 0);
-        }
+    //        foreach (var review in l)
+    //        {
+    //            Assert.Fail();
+    //        }
+    //        Assert.IsTrue(l.Count() == 0);
+    //    }
 
-        [TestMethod()]
-        public void GetAllReviewsTest2()
-        {
-            string expName = "Restaurant1";
-            string expLocation = "123 One St.";
-            RestaurantInfo rest = new RestaurantInfo(expName, expLocation);
-            rest.AddReview("Reviewer1", 5);
-            rest.AddReview("Reviewer2", 4);
-            rest.AddReview("Reviewer3", 3);
-            rest.AddReview("Reviewer4", 2);
-            rest.AddReview("Reviewer5", 1);
+    //    [TestMethod()]
+    //    public void GetAllReviewsTest2()
+    //    {
+    //        string expName = "Restaurant1";
+    //        string expLocation = "123 One St.";
+    //        RestaurantInfo rest = new RestaurantInfo(expName, expLocation);
+    //        rest.AddReview("Reviewer1", 5);
+    //        rest.AddReview("Reviewer2", 4);
+    //        rest.AddReview("Reviewer3", 3);
+    //        rest.AddReview("Reviewer4", 2);
+    //        rest.AddReview("Reviewer5", 1);
 
-            var l = rest.GetAllReviews();
+    //        var l = rest.GetAllReviews();
 
-            foreach (var review in l)
-            {
-                Assert.AreEqual(review.ReviewerName.Length, 9);
-            }
-            Assert.IsTrue(l.Count() == 05);
-        }
-    }
+    //        foreach (var review in l)
+    //        {
+    //            Assert.AreEqual(review.ReviewerName.Length, 9);
+    //        }
+    //        Assert.IsTrue(l.Count() == 05);
+    //    }
+    //}
 }

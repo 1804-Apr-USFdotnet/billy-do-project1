@@ -8,7 +8,7 @@ using RestaurantReviewsLibrary.Interfaces;
 
 namespace RestaurantReviewsLibrary.Models
 {
-    public class Review : IReview
+    public class ReviewInfo
     {
         // properties
         public int Rating { get; set; }
@@ -17,34 +17,9 @@ namespace RestaurantReviewsLibrary.Models
         public string ReviewerName { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime? DateModified { get; set; }
 
         // Constructors
-        public Review() { }
-
-        public Review(int rating, string name, DateTime time, string description = "")
-        {
-            if (rating <= 0)
-            {
-                Rating = 0;
-            }
-            else
-            {
-                Rating = Math.Min(5, rating);
-                
-            }
-            ReviewerName = name;
-            DateCreated = time;
-            Description = description;
-        }
-
-        public Review(DataAccessLayer.Models.Review dbModel)
-        {
-            Rating = dbModel.Rating;
-            ReviewId = dbModel.Id;
-            RestaurantId = dbModel.RestaurantId;
-            ReviewerName = dbModel.Username;
-            Description = dbModel.Description;
-            DateCreated = dbModel.DateCreated;
-        }
+        public ReviewInfo() { }
     }
 }

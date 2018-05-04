@@ -54,10 +54,8 @@
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Models\EntityBase.cs" />
     <Compile Include="Models\Repository.cs" />
-    <Compile Include="Models\RestaurantRepository.cs" />
     <Compile Include="Models\Restaurant.cs" />
     <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\ReviewRepository.cs" />
     <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="RRDb.cs" />
     <Compile Include="RRCrud.cs" />

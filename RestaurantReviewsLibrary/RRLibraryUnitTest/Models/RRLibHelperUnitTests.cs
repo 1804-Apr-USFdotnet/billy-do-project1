@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RestaurantReviewsLibrary.Models;
+using RRLibraryUnitTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,92 +15,41 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void RRLibHelperConstructorTest()
         {
-            RRLibHelper infoObj = new RRLibHelper();
-            int expected = 51;
-            int expectedReviewCount = 7;// total = 188;
+            RRLibHelper infoObj = new RRLibHelper(new MyTestContext());
 
-            var actual = infoObj.ListOfRestaurants.Count();
-            int actualReviewCount = infoObj.ListOfRestaurants.ElementAt(2).ReviewCount;
-
-            Assert.AreEqual(expected, actual);
-            Assert.AreEqual(expectedReviewCount, actualReviewCount);
+            Assert.Fail();
         }
 
 
         [TestMethod()]
         public void GetTopRestaurantsTest()
         {
-            // Dummy Data: Franklin BBQ, Pizza Place (Tallahassee), Checkers
-            RRLibHelper infoObj = new RRLibHelper();
-            string first = "Rath, Stehr and O'Connell";
-            string second = "Schiller LLC";
-            string secondLocation = "Old Shore";
-            string third = "Collier, Beatty and Mertz";
-
-            var a = infoObj.GetTopRestaurants(3);
-
-            Assert.AreEqual(first, a.ElementAt(0).Name);
-            Assert.AreEqual(second, a.ElementAt(1).Name);
-            Assert.AreEqual(secondLocation, a.ElementAt(1).Location);
-            Assert.AreEqual(third, a.ElementAt(2).Name);
+            Assert.Fail();
 
         }
 
         [TestMethod()]
         public void GetAllRestaurantsTest()
         {
-            RRLibHelper infoObj = new RRLibHelper();
-            int expectedRestaurantCount = 51;
-
-            var a = infoObj.GetAllRestaurants();
-
-            Assert.AreEqual(expectedRestaurantCount, a.Count());
-            foreach (var restaurant in a)
-            {
-                Assert.IsNotNull(restaurant.Name);
-            }
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void GetAllReviewsTest()
         {
-            RRLibHelper infoObj = new RRLibHelper();
-            int expectedReviewCount = 188;
-
-            var actualReviews = infoObj.GetAllReviews();
-
-            Assert.AreEqual(expectedReviewCount, actualReviews.Count());
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void SearchRestaurantTest1()
         {
-            RRLibHelper infoObj = new RRLibHelper();
-            string expectedRestName = "Thiel LLC";
-            int expectedCount = 1;
-
-            var a = infoObj.SearchRestaurant("Thiel LLC");
-
-            Assert.AreEqual(expectedCount, a.Count());
-            Assert.AreEqual(expectedRestName, a.ElementAt(0).Name);
+            Assert.Fail();
         }
 
         [TestMethod()]
         public void SearchRestaurantTest2()
         {
-            string restPartialName = "Jo";
-            RRLibHelper infoObj = new RRLibHelper();
-            string expectedRestName1 = "Jones Group";
-            string expectedRestName2 = "Johns Group";
-            string expectedRestName3 = "Jones LLC";
-            int expectedCount = 3;
-
-            var a = infoObj.SearchRestaurant(restPartialName);
-
-            Assert.AreEqual(expectedCount, a.Count());
-            Assert.AreEqual(expectedRestName1, a.ElementAt(0).Name);
-            Assert.AreEqual(expectedRestName2, a.ElementAt(1).Name);
-            Assert.AreEqual(expectedRestName3, a.ElementAt(2).Name);
+            Assert.Fail();
         }
     }
 }
