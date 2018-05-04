@@ -5,8 +5,9 @@ namespace DataAccessLayer
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using DataAccessLayer.Models;
 
-    public class RRDb : DbContext
+    public class RRDb : DbContext, IDbContext
     {
         // Your context has been configured to use a 'Model1' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
@@ -25,25 +26,16 @@ namespace DataAccessLayer
         //public virtual DbSet<MyEntities> Restaurants { get; set; }
         public virtual DbSet<Restaurant> Restaurants { get; set; }
         public virtual DbSet<Review> Reviews { get; set; }
+
+        public override int SaveChanges()
+        {
+            // TODO: Do other stuff? Ensure DateCreated/Modified is set properly here?
+            return base.SaveChanges();
+        }
+
+        IDbSet<TEntity> IDbContext.Set<TEntity>()
+        {
+            return base.Set<TEntity>();
+        }
     }
-
-    public class Restaurant
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Location { get; set; }
-
-        public List<Review> Reviews { get; set; }
-    }
-
-    public class Review
-    {
-        public int Id { get; set; }
-        public int Rating { get; set; }
-        public string Username { get; set; }
-        public string Description { get; set; }
-        public DateTime DateCreated { get; set; }
-
-        public int RestaurantId { get; set; }
-        public virtual Restaurant Restaurant { get; set; }
-    }
+}

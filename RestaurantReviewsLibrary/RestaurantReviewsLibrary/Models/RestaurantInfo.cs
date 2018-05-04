@@ -13,7 +13,7 @@ namespace RestaurantReviewsLibrary.Models
     public class RestaurantInfo : Business, IRestaurantInfo
     { 
         [XmlArray]
-        public List<Review> ListOfReviews;
+        public List<ReviewInfo> ListOfReviews;
         public int RestaurantId { get; set; }
 
         // Properties
@@ -52,21 +52,21 @@ namespace RestaurantReviewsLibrary.Models
 
         public RestaurantInfo(string name, string loc) : base(name, loc)
         {
-            ListOfReviews = new List<Review>();
+            ListOfReviews = new List<ReviewInfo>();
         }
 
-        public RestaurantInfo(DataAccessLayer.Restaurant dbModel)
+        public RestaurantInfo(DataAccessLayer.Models.Restaurant dbModel)
         {
             Name = dbModel.Name;
             Location = dbModel.Location;
             RestaurantId = dbModel.Id;
-            ListOfReviews = new List<Review>();
+            ListOfReviews = new List<ReviewInfo>();
         }
 
         // Methods
         public void AddReview(string name, int rating, string description = "")
         {
-            Review r = new Review(rating, name, DateTime.Now, description);
+            ReviewInfo r = new ReviewInfo(rating, name, DateTime.Now, description);
             ListOfReviews.Add(r);
         }
 

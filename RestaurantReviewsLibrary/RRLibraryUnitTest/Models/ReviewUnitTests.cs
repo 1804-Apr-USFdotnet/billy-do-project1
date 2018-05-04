@@ -20,7 +20,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
             DateTime expTime = DateTime.Now;
             string expDesc = "";
 
-            Review testObj = new Review(expRating, expName, expTime);
+            ReviewInfo testObj = new ReviewInfo(expRating, expName, expTime);
 
 
             Assert.AreEqual(expRating, testObj.Rating);
@@ -37,7 +37,7 @@ namespace RestaurantReviewsLibrary.Models.Tests
             DateTime expTime = DateTime.Now;
             string expDesc = "These are some words";
 
-            Review testObj = new Review(89, expName, expTime, expDesc);
+            ReviewInfo testObj = new ReviewInfo(89, expName, expTime, expDesc);
 
 
             Assert.AreEqual(expRating, testObj.Rating);

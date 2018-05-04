@@ -6,125 +6,153 @@ using System.Threading.Tasks;
 
 using RestaurantReviewsLibrary.Interfaces;
 using DataAccessLayer;
+using DataAccessLayer.Models;
 
 namespace RestaurantReviewsLibrary.Models
 {
     public class RRLibHelper : IRRLibHelper
     {
-        private static RRCrud crud = new RRCrud();
-        private DataSource _datasrc;
-
-        #region Properties
-        protected List<RestaurantInfo> _myList;
-
-        public IEnumerable<RestaurantInfo> ListOfRestaurants
-        {
-            get
-            {
-                return _myList;
-            }
-        }
-        #endregion
+        private IDbContext context;
+        private Repository<Restaurant> restRepo;
+        private Repository<DataAccessLayer.Models.Review> revRepo;
 
         #region Constructors
-        public RRLibHelper(DataSource src = DataSource.InputDb)
+        public RRLibHelper(IDbContext context)
         {
-            _datasrc = src;
-            _myList = new List<RestaurantInfo>();
-            GetSerializedData();
-            OutputData();
+            this.context = context;
+            restRepo = new Repository<Restaurant>(context);
+            revRepo = new Repository<DataAccessLayer.Models.Review>(context);
+            //GetSerializedData();
+            //OutputData();
         }
         #endregion
 
         #region Methods
 
-        internal void AddRestaurant(string name, string loc)
+        #region CRUD Restaurants
+        public void CreateRestaurant(Restaurant restaurant)
         {
-            _myList.Add(new RestaurantInfo(name, loc));
+            // TODO implement
+            throw new NotImplementedException();
         }
+
+        public void UpdateRestaurant(Restaurant restaurant)
+        {
+            // TODO implement
+            throw new NotImplementedException();
+        }
+
+        public void DeleteRestaurant(Restaurant restaurant)
+        {
+            // TODO implement
+            throw new NotImplementedException();
+        }
+        #endregion
+
+        #region CRUD Reviews
+        public void CreateReview(Review review)
+        {
+            // TODO implement
+            throw new NotImplementedException();
+        }
+
+        public void UpdateReview(Review review)
+        {
+            // TODO implement
+            throw new NotImplementedException();
+        }
+
+        public void DeleteReview(Review review)
+        {
+            // TODO implement
+            throw new NotImplementedException();
+        }
+        #endregion
 
         private void GetSerializedData()
         {
-            if ((_datasrc & DataSource.InputDb) > 0)
-            {
-                // get from database
-                try
-                {
-                    var restList = crud.GetAllRestarurants();
-                    var reviewList = crud.GetAllReviews();
-                    foreach (var restaurant in restList)
-                    {
-                        var restInfo = new RestaurantInfo(restaurant);
-                        var shortList = reviewList.Where((r) => r.RestaurantId == restaurant.Id).ToList();
-                        foreach (var review in shortList)
-                        {
-                            restInfo.ListOfReviews.Add(new Review(review));
-                        }
-                        _myList.Add(restInfo);
-                    }
-                }
-                catch (Exception e)
-                {
-                    // TODO: Log database error
-                }
-            } 
-            else if ((_datasrc & DataSource.InputXml) > 0)
-            {
-                MySerializer.Deserialize(ref _myList);
-            }
-            else
-            {
-                // Did not choose any input!!!
-                // TODO Log error?
-            }
+            //if ((_datasrc & DataSource.InputDb) > 0)
+            //{
+            //    // get from database
+            //    try
+            //    {
+            //        var restList = crud.GetAllRestarurants();
+            //        var reviewList = crud.GetAllReviews();
+            //        foreach (var restaurant in restList)
+            //        {
+            //            var restInfo = new RestaurantInfo(restaurant);
+            //            var shortList = reviewList.Where((r) => r.RestaurantId == restaurant.Id).ToList();
+            //            foreach (var review in shortList)
+            //            {
+            //                restInfo.ListOfReviews.Add(new Review(review));
+            //            }
+            //            _myList.Add(restInfo);
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        // TODO: Log database error
+            //    }
+            //} 
+            //else if ((_datasrc & DataSource.InputXml) > 0)
+            //{
+            //    MySerializer.Deserialize(ref _myList);
+            //}
+            //else
+            //{
+            //    // Did not choose any input!!!
+            //    // TODO Log error?
+            //}
             
         }
 
         private void OutputData()
         {
-            if ((_datasrc & DataSource.OutputDb) > 0)
-            {
-                // store in database
-                //TODO: figure out how to NOT input data if data already exists in DB
-                try
-                {
-                    var a = crud.GetAllRestarurants();
-                    if (a.Count() <= 0)
-                    {
-                        foreach (var item in _myList)
-                        {
-                            int restId = crud.CreateRestaurant(item.Name, item.Location).Id;
-                            item.RestaurantId = restId;
+            //if ((_datasrc & DataSource.OutputDb) > 0)
+            //{
+            //    try
+            //    {
+            //        var a = crud.GetAllRestaurants();
+            //        if (a.Count() <= 0)
+            //        {
+            //            foreach (var item in _myList)
+            //            {
+            //                var rest = crud.CreateRestaurant(item.Name, item.Location);
+            //                int restId = rest.Id;
+            //                item.RestaurantId = restId;
 
-                            foreach (var review in item.ListOfReviews)
-                            {
-                                review.RestaurantId = restId;
-                                int reviewId = crud.CreateReview(review.Rating, review.ReviewerName,
-                                    review.Description, review.DateCreated, restId).Id;
-                                review.ReviewId = reviewId;
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    //TODO: Logging
-                }
-            }
-            else if ((_datasrc & DataSource.OutputXml) > 0)
-            {
-                MySerializer.Serialize(ref _myList);
-            }
-            else
-            {
-                // Did not choose to output
-                // TODO Log info, for all choices
-            }
+            //                foreach (var review in item.ListOfReviews)
+            //                {
+            //                    review.RestaurantId = restId;
+            //                    var retReview = crud.CreateReview(review.Rating, review.ReviewerName,
+            //                        review.Description, review.DateCreated, restId);
+            //                    int reviewId = retReview.Id;
+            //                    review.ReviewId = reviewId;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    catch (Exception e)
+            //    {
+            //        //TODO: Logging on database error?
+            //    }
+            //}
+            //else if ((_datasrc & DataSource.OutputXml) > 0)
+            //{
+            //    MySerializer.Serialize(ref _myList);
+            //    //TODO: Log info, output to xml file
+            //}
+            //else
+            //{
+            //    // Did not choose to output
+            //    // TODO Log info, for all choices
+            //}
         }
 
         public IEnumerable<IRestaurantInfo> GetTopRestaurants(int n)
         {
-            return _myList.OrderByDescending(c => c.GetAverageRating).Take(n);
+            // TODO: implement new version
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IRestaurantInfo> GetTopThreeRestaurants()
@@ -134,37 +162,32 @@ namespace RestaurantReviewsLibrary.Models
 
         public IEnumerable<IRestaurantInfo> GetAllRestaurants()
         {
-            return _myList;
+            // TODO: implement new version
+            throw new NotImplementedException();
         }
 
         public IRestaurantInfo GetRestaurant(string name)
         {
-            var obj = _myList.Find(c => c.Name == name);
-            if (obj == null)
-            {
-                return null;
-            }
-            return obj;
+            // TODO: implement new version
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IReview> GetAllReviews()
         {
-            List<Review> retList = new List<Review>();
-            foreach (var rest in _myList)
-            {
-                retList.AddRange(rest.ListOfReviews);
-            }
-            return retList;
+            // TODO: implement new version
+            throw new NotImplementedException();
         }
 
         public IEnumerable<IRestaurantInfo> SearchRestaurant(string searchQuery)
         {
-            StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
-            var obj = _myList.FindAll(c => c.Name.StartsWith(searchQuery, comparison));
-            return obj;
+            // TODO: implement new version
+            throw new NotImplementedException();
+
+            //StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
+            //var obj = _myList.FindAll(c => c.Name.StartsWith(searchQuery, comparison));
+            //return obj;
         }
         #endregion
     }
 
-    public enum DataSource { InputDb = 1, InputXml = 2, OutputDb = 4, OutputXml = 8};
 }

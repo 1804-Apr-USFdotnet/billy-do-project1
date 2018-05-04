@@ -49,6 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\IDbContext.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Models\EntityBase.cs" />
+    <Compile Include="Models\Repository.cs" />
+    <Compile Include="Models\RestaurantRepository.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\Review.cs" />
+    <Compile Include="Models\ReviewRepository.cs" />
+    <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="RRDb.cs" />
     <Compile Include="RRCrud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -57,8 +67,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

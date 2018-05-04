@@ -37,7 +37,7 @@ namespace RestaurantReviewsLibrary.Models
             Description = description;
         }
 
-        public Review(DataAccessLayer.Review dbModel)
+        public Review(DataAccessLayer.Models.Review dbModel)
         {
             Rating = dbModel.Rating;
             ReviewId = dbModel.Id;

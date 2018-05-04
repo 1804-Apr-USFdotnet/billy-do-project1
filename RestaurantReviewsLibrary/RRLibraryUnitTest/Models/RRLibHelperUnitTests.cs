@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 namespace RestaurantReviewsLibrary.Models.Tests
 {
     [TestClass()]
-    public class RestaurantsInfoUnitTests
+    public class RRLibHelperUnitTests
     {
         [TestMethod()]
-        public void RestaurantsInfoConstructorTest()
+        public void RRLibHelperConstructorTest()
         {
             RRLibHelper infoObj = new RRLibHelper();
             int expected = 51;
