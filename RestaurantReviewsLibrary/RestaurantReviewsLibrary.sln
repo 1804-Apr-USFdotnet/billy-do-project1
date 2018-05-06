@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RestaurantReviewsLibrary", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{65550CEF-F5ED-4CA7-88D0-9C8AE085AEAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RR.Web", "RR.Web\RR.Web.csproj", "{788F8684-29C1-4C4A-B063-6EA964284220}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RR.Web.Tests", "RR.Web.Tests\RR.Web.Tests.csproj", "{C974F89E-8C6F-4042-901F-4466892752BC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,14 +27,6 @@ Global
 		{65550CEF-F5ED-4CA7-88D0-9C8AE085AEAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65550CEF-F5ED-4CA7-88D0-9C8AE085AEAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65550CEF-F5ED-4CA7-88D0-9C8AE085AEAC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{788F8684-29C1-4C4A-B063-6EA964284220}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{788F8684-29C1-4C4A-B063-6EA964284220}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{788F8684-29C1-4C4A-B063-6EA964284220}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{788F8684-29C1-4C4A-B063-6EA964284220}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C974F89E-8C6F-4042-901F-4466892752BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C974F89E-8C6F-4042-901F-4466892752BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C974F89E-8C6F-4042-901F-4466892752BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C974F89E-8C6F-4042-901F-4466892752BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
