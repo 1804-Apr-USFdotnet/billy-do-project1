@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using DataAccessLayer.Models;
+using RestaurantReviewsLibrary.Models;
+
 namespace RR.Web.Controllers
 {
     public class RestaurantsController : Controller
@@ -11,11 +14,18 @@ namespace RR.Web.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
+            RRLibHelper libHelper;
+            IEnumerable<Restaurant> topThree;
+            using (var context = new DataAccessLayer.RRDb())
+            {
+                libHelper = new RRLibHelper(context);
+                topThree = libHelper.GetTopThreeRestaurants();
+            }
             /* Top 3 restaurants shown, perhaps in carousel
              * Each restaurant pic is a link to Details of restaurant
              * Input to search for restaurant, or choose by Id --> Details/???
              */
-            return View();
+            return View(topThree);
         }
 
         // GET: Restaurants/Details/5
@@ -24,7 +34,18 @@ namespace RR.Web.Controllers
             /* Show Details for restaurant
              * Have "submit review" link, that goes to Reviews/Create
              */
-            return View();
+            var rest = new Restaurant
+            {
+                Id = -1,
+                Street = "123 Fake St.",
+                Name = "Moe's Tavern",
+                City = "Springfield",
+                State = "AllStates",
+                Zipcode = "00000",
+                Country = "USA",
+                //ImageUrl = "https://vignette.wikia.nocookie.net/simpsons/images/9/96/800px-Moe's_Tavern.png"
+            };
+            return View(rest);
         }
 
         // GET: Restaurants/Create
@@ -35,17 +56,39 @@ namespace RR.Web.Controllers
             return View();
         }
 
+        //// POST: Restaurants/Create
+        //[HttpPost]
+        //public ActionResult Create(FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
+
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
+
         // POST: Restaurants/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Restaurant restaurant)
         {
             try
             {
                 // TODO: Add insert logic here
+                RRLibHelper libHelper;
+                using (var context = new DataAccessLayer.RRDb())
+                {
+                    libHelper = new RRLibHelper(context);
+                    libHelper.CreateRestaurant(restaurant);
+                }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception ex)
             {
                 return View();
             }
@@ -57,6 +100,8 @@ namespace RR.Web.Controllers
             /* Show input fields
              * Each field should have current info as value
              */
+             // Get restaurant object by ID
+             // send object to view
             return View();
         }
 

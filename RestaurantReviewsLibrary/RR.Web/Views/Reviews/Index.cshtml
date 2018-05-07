@@ -1,6 +1,26 @@
 ﻿@{
     ViewBag.Title = "Reviews";
-}]
-<input type="text" name="review" />
-<input type="number" name="id" />
-<input type="submit" value="Submit" />
+}
+@model IEnumerable<DataAccessLayer.Models.Review>
+
+<form>
+    Restaurant ID: <input type="number" name="restId" /> <br />
+    @Html.Label(" - OR - ")<br />
+    Review ID:  <input type="number" name="reviewId" /> <br />
+    <input type="submit" value="Submit" />
+</form>
+
+@*
+    @using (Html.BeginForm())
+    {
+        @Html.Label("Enter Restaurant ID: ");
+        @Html.Editor("RestaurantId");<br />
+
+        @Html.Label("- OR -"); <br />
+
+        @Html.Label("Enter Review ID: ");
+        @Html.Editor("ReviewId");<br />
+
+        <input type="submit" value="Submit" />
+    }
+*@
