@@ -29,13 +29,19 @@ namespace DataAccessLayer.Models
         [StringLength(20)]
         public string Country { get; set; }
 
+        [Url]
+        public string ImageUrl { get; set; }
+
         public List<Review> Reviews { get; set; }
 
         public double AverageRating
         {
             get
             {
-                return Reviews.Sum(x => x.Id) / Reviews.Count();
+                if (Reviews != null)
+                    return Reviews.Sum(x => x.Id) / Reviews.Count();
+                else
+                    return 0;
             }
         }
     }

@@ -30,6 +30,20 @@ namespace DataAccessLayer
         public override int SaveChanges()
         {
             // TODO: Do other stuff? Ensure DateCreated/Modified is set properly here?
+            var AddedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Added).ToList();
+
+            AddedEntities.ForEach(E =>
+            {
+                E.Property("DateCreated").CurrentValue = DateTime.Now;
+            });
+
+            var ModifiedEntities = ChangeTracker.Entries().Where(E => E.State == EntityState.Modified).ToList();
+
+            ModifiedEntities.ForEach(E =>
+            {
+                E.Property("DateModified").CurrentValue = DateTime.Now;
+            });
+
             return base.SaveChanges();
         }
 

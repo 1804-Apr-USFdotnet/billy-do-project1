@@ -44,6 +44,7 @@ namespace DataAccessLayer.Models
         public void Create(TEntity newEntity)
         {
             Entities.Add(newEntity);
+            _db.SaveChanges();
         }
 
         public void Delete(TEntity entity)
