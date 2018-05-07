@@ -158,6 +158,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ReviewViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -207,10 +208,13 @@
     <Content Include="Views\Restaurants\List.cshtml" />
     <Content Include="Views\Shared\_NoRestFound.cshtml" />
     <Content Include="Views\Restaurants\Delete.cshtml" />
+    <Content Include="Views\Reviews\Reviews.cshtml" />
+    <Content Include="Views\Shared\_RestaurantDetail.cshtml" />
+    <Content Include="Views\Shared\_Test.cshtml" />
+    <Content Include="Views\Shared\_ReviewDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

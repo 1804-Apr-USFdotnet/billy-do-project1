@@ -1,0 +1,17 @@
+﻿@model RR.Web.Models.ReviewViewModel
+
+@{
+    Html.RenderPartial("_RestaurantDetail", Model.Restaurant);
+}
+
+@if (Model.Reviews == null)
+{
+    <span style="font-size:2em;">No reviews found.</span>
+}
+else
+{
+    foreach (var review in Model.Reviews)
+    {
+        Html.RenderPartial("_ReviewDetail", review); <br />
+    }
+}

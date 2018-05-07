@@ -4,10 +4,25 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using DataAccessLayer.Models;
+using RestaurantReviewsLibrary.Models;
+using RR.Web.Models;
+
 namespace RR.Web.Controllers
 {
     public class ReviewsController : Controller
     {
+        private static RRLibHelper libHelper;
+
+        private RRLibHelper GetLibHelper()
+        {
+            if (libHelper == null)
+            {
+                libHelper = new RRLibHelper();
+            }
+            return libHelper;
+        }
+
         // GET: Reviews
         public ActionResult Index()
         {
@@ -20,20 +35,13 @@ namespace RR.Web.Controllers
         // GET: Reviews/Details/5
         public ActionResult Details(int id)
         {
-            var review = new DataAccessLayer.Models.Review
-            {
-                Id = 1,
-                Rating = 4,
-                RestaurantId = 5,
-                Username = "googleuser",
-                Description = "I give it a 4/100."
-            };
+            var rev = GetLibHelper().GetReview(id);
 
-            return View(review);
+            return View(rev);
         }
 
         // GET: Reviews/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
             /* Show fields for creating a review
              */
@@ -60,7 +68,6 @@ namespace RR.Web.Controllers
         public ActionResult Edit(int id)
         {
             /* show fields allowed for editing a review
-             * 
              */
             return View();
         }
@@ -115,6 +122,7 @@ namespace RR.Web.Controllers
             if (restId != null && restId != "")
             {
                 //go to restaurantDetail, show reviews
+                return RedirectToAction("Reviews", new { id = Convert.ToInt32(restId) });
             }
             else if (reviewId != null && reviewId != "")
             {
@@ -127,9 +135,15 @@ namespace RR.Web.Controllers
         public ActionResult Reviews(int id)
         {
             // show restaurant detail
+            var restaurant = GetLibHelper().GetRestaurant(id);
             // get all reviews
+            IEnumerable<Review> reviews = restaurant.Reviews;
+            reviews = new List<Review>();
             // show all reviews
-            return View();
+            var vmObj = new ReviewViewModel(restaurant, reviews);
+
+            return View(vmObj);
+            //return View();
         }
     }
 }
