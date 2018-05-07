@@ -113,9 +113,18 @@ namespace RR.Web.Controllers
             /* Show input fields
              * Each field should have current info as value
              */
-             // Get restaurant object by ID
-             // send object to view
-            return View();
+            // Get restaurant object by ID
+            // send object to view
+
+            RRLibHelper libHelper;
+            Restaurant rest;
+            using (var context = new DataAccessLayer.RRDb())
+            {
+                libHelper = new RRLibHelper(context);
+                rest = libHelper.GetRestaurant(id);
+            }
+
+            return View(rest);
         }
 
         // POST: Restaurants/Edit/5
@@ -124,14 +133,27 @@ namespace RR.Web.Controllers
         {
             try
             {
-                // TODO: Add update logic here
-
+                RRLibHelper libHelper;
+                using (var context = new DataAccessLayer.RRDb())
+                {
+                    libHelper = new RRLibHelper(context);
+                    var restaurant = libHelper.GetRestaurant(id);
+                    //TODO use UpdateRestaurant method?
+                }
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+
+        [NonAction]
+        public Restaurant UpdateRestaurant(Restaurant rest, FormCollection collection)
+        {
+            rest.Name = collection["Name"];
+            rest.ImageUrl = collection["ImageUrl"];
+            return rest;
         }
 
         // GET: Restaurants/Delete/5
