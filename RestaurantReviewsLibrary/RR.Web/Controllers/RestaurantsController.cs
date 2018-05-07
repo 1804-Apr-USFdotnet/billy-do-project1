@@ -43,7 +43,6 @@ namespace RR.Web.Controllers
              */
             Restaurant rest;
 
-            //RRLibHelper libHelper = new RRLibHelper();
             rest = GetLibHelper().GetRestaurant(id);
 
             return View(rest);
@@ -54,8 +53,9 @@ namespace RR.Web.Controllers
             var name = Request.QueryString["restaurant"];
             if (name != null && name != "")
             {
-                //TODO search by name, and return result
-                return RedirectToAction("Details", 1);
+                //TODO Search is not working...
+                var r = GetLibHelper().SearchRestaurant(name);
+                return RedirectToAction("List", new { list =  r });
             }
             else
             {
@@ -153,7 +153,8 @@ namespace RR.Web.Controllers
             /* Ask if they want to delete
              * Show restaurant info
              */
-            return View();
+            var r = GetLibHelper().GetRestaurant(id);
+            return View(r);
         }
 
         // POST: Restaurants/Delete/5
@@ -162,8 +163,7 @@ namespace RR.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
+                GetLibHelper().DeleteRestaurant(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -178,14 +178,17 @@ namespace RR.Web.Controllers
             if (list == null)
             {
                 // Get list of all resturants
+                list = GetLibHelper().GetAllRestaurants();
             }
             else if (list.Count() == 0)
             {
-                // Show "No restaurants listed" text?
+                // TODO Show "No restaurants listed" text?
+                return View(list);
             }
             else if (list.Count() == 1)
             {
                 // Redirect to Details page?
+                return RedirectToAction("Details", new { id = list.FirstOrDefault().Id  });
             }
              else
             {
