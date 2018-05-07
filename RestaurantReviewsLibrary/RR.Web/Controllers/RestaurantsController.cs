@@ -11,16 +11,23 @@ namespace RR.Web.Controllers
 {
     public class RestaurantsController : Controller
     {
+        private static RRLibHelper libHelper;
+
+        private RRLibHelper GetLibHelper()
+        {
+            if (libHelper == null)
+            {
+                libHelper = new RRLibHelper();
+            }
+            return libHelper;
+        }
+
         // GET: Restaurants
         public ActionResult Index()
         {
-            RRLibHelper libHelper;
             IEnumerable<Restaurant> topThree;
-            using (var context = new DataAccessLayer.RRDb())
-            {
-                libHelper = new RRLibHelper(context);
-                topThree = libHelper.GetTopThreeRestaurants();
-            }
+            topThree = GetLibHelper().GetTopThreeRestaurants();
+
             /* Top 3 restaurants shown, perhaps in carousel
              * Each restaurant pic is a link to Details of restaurant
              * Input to search for restaurant, or choose by Id --> Details/???
@@ -36,12 +43,8 @@ namespace RR.Web.Controllers
              */
             Restaurant rest;
 
-            RRLibHelper libHelper;
-            using (var context = new DataAccessLayer.RRDb())
-            {
-                libHelper = new RRLibHelper(context);
-                rest = libHelper.GetRestaurant(id);
-            }
+            //RRLibHelper libHelper = new RRLibHelper();
+            rest = GetLibHelper().GetRestaurant(id);
 
             return View(rest);
         }
@@ -92,14 +95,10 @@ namespace RR.Web.Controllers
         {
             try
             {
-                RRLibHelper libHelper;
-                using (var context = new DataAccessLayer.RRDb())
-                {
-                    libHelper = new RRLibHelper(context);
-                    libHelper.CreateRestaurant(restaurant);
-                }
+                //RRLibHelper libHelper = new RRLibHelper();
+                GetLibHelper().CreateRestaurant(restaurant);
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = restaurant.Id });
             }
             catch (Exception ex)
             {
@@ -116,13 +115,9 @@ namespace RR.Web.Controllers
             // Get restaurant object by ID
             // send object to view
 
-            RRLibHelper libHelper;
             Restaurant rest;
-            using (var context = new DataAccessLayer.RRDb())
-            {
-                libHelper = new RRLibHelper(context);
-                rest = libHelper.GetRestaurant(id);
-            }
+            RRLibHelper libHelper = new RRLibHelper();
+            rest = GetLibHelper().GetRestaurant(id);
 
             return View(rest);
         }
@@ -133,13 +128,9 @@ namespace RR.Web.Controllers
         {
             try
             {
-                RRLibHelper libHelper;
-                using (var context = new DataAccessLayer.RRDb())
-                {
-                    libHelper = new RRLibHelper(context);
-                    var restaurant = libHelper.GetRestaurant(id);
-                    //TODO use UpdateRestaurant method?
-                }
+                //RRLibHelper libHelper = new RRLibHelper();
+                var restaurant = GetLibHelper().GetRestaurant(id);
+                //TODO use UpdateRestaurant method?
                 return RedirectToAction("Index");
             }
             catch
@@ -179,6 +170,28 @@ namespace RR.Web.Controllers
             {
                 return View();
             }
+        }
+
+        [HttpGet]
+        public ActionResult List(IEnumerable<Restaurant> list)
+        {
+            if (list == null)
+            {
+                // Get list of all resturants
+            }
+            else if (list.Count() == 0)
+            {
+                // Show "No restaurants listed" text?
+            }
+            else if (list.Count() == 1)
+            {
+                // Redirect to Details page?
+            }
+             else
+            {
+                // Show list of restaurants
+            }
+            return View(list);
         }
     }
 }

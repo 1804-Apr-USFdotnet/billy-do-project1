@@ -17,9 +17,9 @@ namespace RestaurantReviewsLibrary.Models
         private Repository<Review> revRepo;
 
         #region Constructors
-        public RRLibHelper(IDbContext context)
+        public RRLibHelper()
         {
-            this.context = context;
+            context = new RRDb();
             restRepo = new Repository<Restaurant>(context);
             revRepo = new Repository<Review>(context);
         }

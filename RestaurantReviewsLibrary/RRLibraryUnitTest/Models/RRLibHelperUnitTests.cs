@@ -15,7 +15,8 @@ namespace RestaurantReviewsLibrary.Models.Tests
         [TestMethod()]
         public void RRLibHelperConstructorTest()
         {
-            RRLibHelper infoObj = new RRLibHelper(new MyTestContext());
+            // Helper doesn't take a context anymore?
+            //RRLibHelper infoObj = new RRLibHelper();
 
             Assert.Fail();
         }
