@@ -58,7 +58,6 @@
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\UnitOfWork.cs" />
     <Compile Include="RRDb.cs" />
-    <Compile Include="RRCrud.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

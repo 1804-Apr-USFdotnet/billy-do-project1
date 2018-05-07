@@ -3,7 +3,7 @@
 }
 @model IEnumerable<DataAccessLayer.Models.Review>
 
-<form>
+<form action="~/Reviews/Search">
     Restaurant ID: <input type="number" name="restId" /> <br />
     @Html.Label(" - OR - ")<br />
     Review ID:  <input type="number" name="reviewId" /> <br />

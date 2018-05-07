@@ -275,9 +275,11 @@ namespace RestaurantReviewsLibrary.Models
         public IEnumerable<Restaurant> SearchRestaurant(string searchQuery)
         {
             // TODO: implement new version
-            throw new NotImplementedException();
+            StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
+            //restRepo.FindAll().ToList().FindAll(c => c.Name.StartsWith(searchQuery, comparison));
+            return restRepo.FindAll().ToList().FindAll(c => c.Name.StartsWith(searchQuery, comparison));
+            //throw new NotImplementedException();
 
-            //StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
             //var obj = _myList.FindAll(c => c.Name.StartsWith(searchQuery, comparison));
             //return obj;
         }

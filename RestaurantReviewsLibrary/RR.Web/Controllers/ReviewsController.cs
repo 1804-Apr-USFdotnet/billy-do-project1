@@ -105,5 +105,31 @@ namespace RR.Web.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult Search()
+        {
+            var qs = Request.QueryString;
+            var restId = qs["restId"];
+            var reviewId = qs["reviewId"];
+            if (restId != null && restId != "")
+            {
+                //go to restaurantDetail, show reviews
+            }
+            else if (reviewId != null && reviewId != "")
+            {
+                // get Id, go to Details/Id
+            }
+            return RedirectToAction("");
+        }
+
+        [HttpGet]
+        public ActionResult Reviews(int id)
+        {
+            // show restaurant detail
+            // get all reviews
+            // show all reviews
+            return View();
+        }
     }
 }

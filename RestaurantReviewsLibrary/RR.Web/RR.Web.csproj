@@ -203,7 +203,10 @@
     <Content Include="Views\Restaurants\Details.cshtml" />
     <Content Include="Views\Restaurants\Create.cshtml" />
     <Content Include="Views\Restaurants\Edit.cshtml" />
-    <Content Include="Views\Shared\View.cshtml" />
+    <Content Include="Views\Shared\_TopThreeCarousel.cshtml" />
+    <Content Include="Views\Restaurants\List.cshtml" />
+    <Content Include="Views\Shared\_NoRestFound.cshtml" />
+    <Content Include="Views\Restaurants\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
