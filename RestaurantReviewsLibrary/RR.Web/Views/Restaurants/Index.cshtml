@@ -1,38 +1,40 @@
 ﻿@model IEnumerable<DataAccessLayer.Models.Restaurant>
 @{
+    /**/
+
     ViewBag.Title = "Restaurants";
-    string s1 = Model.ElementAtOrDefault(0) == null ? "" : Model.ElementAtOrDefault(0).ImageUrl;
-    string s2 = Model.ElementAtOrDefault(1) == null ? "" : Model.ElementAtOrDefault(1).ImageUrl;
-    string s3 = Model.ElementAtOrDefault(2) == null ? "" : Model.ElementAtOrDefault(2).ImageUrl;
 }
 
-
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="d-block w-100" src="@s1" alt="First slide">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="@s2" alt="Second slide">
-        </div>
-        <div class="carousel-item">
-            <img class="d-block w-100" src="@s3" alt="Third slide">
-        </div>
-    </div>
-    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
+<div>
+    @Html.Partial("_TopThreeCarousel")
 </div>
 
 <br />
 <form action="~/Restaurants/Search" method="get">
-    Search by restaurant name: <input type="text" name="restaurant" /> <br />
-    @Html.Label(" - OR - ") <br />
-    Get restaurant by id: <input type="number" name="id" /> <br />
-    <input type="submit" value="Submit" />
+    <fieldset>
+        <legend>Search for Restaurant</legend>
+        Search by restaurant name: <input type="text" name="restaurant" /> <br />
+        @Html.Label(" - OR - ") <br />
+        Get restaurant by id: <input type="number" name="id" /> <br />
+        <input type="submit" value="Submit" />
+    </fieldset>
 </form>
+<br /><br />
+
+<fieldset>
+    <legend>New Restaurant?</legend>
+    @Html.ActionLink("Create", "Create")
+</fieldset>
+<br /><br />
+
+<fieldset>
+    <legend></legend>
+    @Html.ActionLink("All Restuarants", "List")
+</fieldset>
+<br /><br />
+
+<!--
+<p style="padding: -4px;border:2px solid red;">Word</p>
+<p style="padding: -10px;border:2px solid red;">Word2</p>
+<p>Paragraph <span style="padding:-100px;border:2px solid red;">word</span> 1</p>
+-->
