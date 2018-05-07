@@ -34,18 +34,32 @@ namespace RR.Web.Controllers
             /* Show Details for restaurant
              * Have "submit review" link, that goes to Reviews/Create
              */
-            var rest = new Restaurant
+            Restaurant rest;
+
+            RRLibHelper libHelper;
+            using (var context = new DataAccessLayer.RRDb())
             {
-                Id = -1,
-                Street = "123 Fake St.",
-                Name = "Moe's Tavern",
-                City = "Springfield",
-                State = "AllStates",
-                Zipcode = "00000",
-                Country = "USA",
-                //ImageUrl = "https://vignette.wikia.nocookie.net/simpsons/images/9/96/800px-Moe's_Tavern.png"
-            };
+                libHelper = new RRLibHelper(context);
+                rest = libHelper.GetRestaurant(id);
+            }
+
             return View(rest);
+        }
+
+        public ActionResult Search()
+        {
+            var name = Request.QueryString["restaurant"];
+            if (name != null && name != "")
+            {
+                //TODO search by name, and return result
+                return RedirectToAction("Details", 1);
+            }
+            else
+            {
+                // look by id
+                var restId = Request.QueryString["id"];
+                return RedirectToAction("Details", new { id = Convert.ToInt32(restId) });
+            }
         }
 
         // GET: Restaurants/Create
@@ -78,7 +92,6 @@ namespace RR.Web.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
                 RRLibHelper libHelper;
                 using (var context = new DataAccessLayer.RRDb())
                 {
