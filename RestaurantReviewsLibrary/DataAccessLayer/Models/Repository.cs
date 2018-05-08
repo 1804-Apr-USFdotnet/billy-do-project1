@@ -12,10 +12,10 @@ namespace DataAccessLayer.Models
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity:EntityBase
     {
-        private readonly IDbContext _db;
-        private IDbSet<TEntity> _entities; //???
+        private readonly DbContext _db;
+        private DbSet<TEntity> _entities; //???
 
-        public Repository(IDbContext context)
+        public Repository(DbContext context)
         {
             this._db = context;
             //this._entities = context.Set<TEntity>();
@@ -29,7 +29,7 @@ namespace DataAccessLayer.Models
             }
         }
 
-        private IDbSet<TEntity> Entities
+        private DbSet<TEntity> Entities
         {
             get
             {
@@ -71,7 +71,9 @@ namespace DataAccessLayer.Models
         public void Update(TEntity entity)
         {
             //TODO Other way of doing this?
-            throw new NotImplementedException();
+            Entities.Attach(entity);
+            _db.Entry(entity).State = EntityState.Modified;
+            _db.SaveChanges();
         }
     }
 }

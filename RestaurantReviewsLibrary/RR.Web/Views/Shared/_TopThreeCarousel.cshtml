@@ -1,8 +1,8 @@
-﻿@model IEnumerable<DataAccessLayer.Models.Restaurant>
+﻿@model List<DataAccessLayer.Models.Restaurant>
 @{ 
-    string s1 = Model.ElementAtOrDefault(0) == null ? "" : Model.ElementAtOrDefault(0).ImageUrl;
-    string s2 = Model.ElementAtOrDefault(1) == null ? "" : Model.ElementAtOrDefault(1).ImageUrl;
-    string s3 = Model.ElementAtOrDefault(2) == null ? "" : Model.ElementAtOrDefault(2).ImageUrl;
+    string s1 = Model[0] == null ? "" : Model[0].ImageUrl;
+    string s2 = Model[1] == null ? "" : Model[1].ImageUrl;
+    string s3 = Model[2] == null ? "" : Model[2].ImageUrl;
 }
 
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">

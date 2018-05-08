@@ -25,8 +25,8 @@ namespace RR.Web.Controllers
         // GET: Restaurants
         public ActionResult Index()
         {
-            IEnumerable<Restaurant> topThree;
-            topThree = GetLibHelper().GetTopThreeRestaurants();
+            List<Restaurant> topThree;
+            topThree = GetLibHelper().GetTopThreeRestaurants().ToList();
 
             /* Top 3 restaurants shown, perhaps in carousel
              * Each restaurant pic is a link to Details of restaurant
@@ -115,23 +115,28 @@ namespace RR.Web.Controllers
             // Get restaurant object by ID
             // send object to view
 
-            Restaurant rest;
-            RRLibHelper libHelper = new RRLibHelper();
-            rest = GetLibHelper().GetRestaurant(id);
-
+            Restaurant rest = GetLibHelper().GetRestaurant(id);
             return View(rest);
         }
 
         // POST: Restaurants/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Restaurant restaurant)
         {
             try
             {
                 //RRLibHelper libHelper = new RRLibHelper();
-                var restaurant = GetLibHelper().GetRestaurant(id);
-                //TODO use UpdateRestaurant method?
-                return RedirectToAction("Index");
+                var oldRest = GetLibHelper().GetRestaurant(id);
+                oldRest.Name = restaurant.Name;
+                oldRest.Street = restaurant.Street;
+                oldRest.City = restaurant.City;
+                oldRest.State = restaurant.State;
+                oldRest.Country = restaurant.Country;
+                oldRest.Zipcode = restaurant.Zipcode;
+                oldRest.ImageUrl = restaurant.ImageUrl;
+                
+                GetLibHelper().UpdateRestaurant(oldRest);
+                return RedirectToAction("Details", new { id = oldRest.Id });
             }
             catch
             {

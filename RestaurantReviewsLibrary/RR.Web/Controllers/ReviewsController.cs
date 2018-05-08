@@ -79,18 +79,22 @@ namespace RR.Web.Controllers
         {
             /* show fields allowed for editing a review
              */
-            return View();
+            var review = GetLibHelper().GetReview(id);
+            return View(review);
         }
 
         // POST: Reviews/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Review review)
         {
             try
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                var oldrev = GetLibHelper().GetReview(id);
+                oldrev.Rating = review.Rating;
+                oldrev.Username = review.Username;
+                oldrev.Description = review.Description;
+                GetLibHelper().UpdateReview(oldrev);
+                return RedirectToAction("Details", new { id = oldrev.Id });
             }
             catch
             {

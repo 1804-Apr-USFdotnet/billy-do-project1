@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using RestaurantReviewsLibrary.Interfaces;
 using DataAccessLayer;
 using DataAccessLayer.Models;
+using System.Data.Entity;
 
 namespace RestaurantReviewsLibrary.Models
 {
     public class RRLibHelper : IRRLibHelper
     {
-        private IDbContext context;
+        private DbContext context;
         private Repository<Restaurant> restRepo;
         private Repository<Review> revRepo;
 

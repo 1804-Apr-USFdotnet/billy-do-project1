@@ -1,10 +1,10 @@
-﻿@model IEnumerable<DataAccessLayer.Models.Restaurant>
+﻿@model List<DataAccessLayer.Models.Restaurant>
 @{
     ViewBag.Title = "Restaurants";
 }
 
 <div>
-    @Html.Partial("_TopThreeCarousel")
+    @{ Html.RenderPartial("_TopThreeCarousel", Model); }
 </div>
 
 <br />
