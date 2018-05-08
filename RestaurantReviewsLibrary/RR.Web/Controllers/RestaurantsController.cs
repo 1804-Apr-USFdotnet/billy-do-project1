@@ -180,10 +180,31 @@ namespace RR.Web.Controllers
         [HttpGet]
         public ActionResult List(IEnumerable<Restaurant> list)
         {
+            string sortOption = Request["sort"];
             if (list == null)
             {
                 // Get list of all resturants
-                list = GetLibHelper().GetAllRestaurants();
+                if (sortOption != null && sortOption != "")
+                {
+                    SortBy sortBy = SortBy.NameAsc;
+                    switch (sortOption)
+                    {
+                        case "name":
+                            sortBy = SortBy.NameDesc;
+                            break;
+                        case "review":
+                            sortBy = SortBy.ReviewCountDesc;
+                            break;
+                        case "avg":
+                            sortBy = SortBy.AverageDesc;
+                            break;
+                    }
+                    list = GetLibHelper().GetAllRestaurantsSortBy(sortBy);
+                }
+                else
+                {
+                    list = GetLibHelper().GetAllRestaurants();
+                }
             }
             else if (list.Count() == 0)
             {
