@@ -1,5 +1,7 @@
 ﻿@model DataAccessLayer.Models.Restaurant
-
+@{
+    ViewBag.Title = "Restaurants";
+}
 <div>
     <h4>Restaurant</h4>
     <hr />
@@ -7,13 +9,13 @@
         @if (ViewData.Model.ImageUrl != null)
         {
             <dt>
-                 
+
             </dt>
             <dd>
                 <img src="@Model.ImageUrl" alt="Restaurant Image" height="200" />
             </dd>
         }
-        
+
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>

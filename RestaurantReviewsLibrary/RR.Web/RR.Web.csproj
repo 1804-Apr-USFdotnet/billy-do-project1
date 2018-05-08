@@ -212,6 +212,9 @@
     <Content Include="Views\Shared\_RestaurantDetail.cshtml" />
     <Content Include="Views\Shared\_Test.cshtml" />
     <Content Include="Views\Shared\_ReviewDetail.cshtml" />
+    <Content Include="Views\Reviews\Create.cshtml" />
+    <Content Include="Views\Shared\_ReviewTableHeader.cshtml" />
+    <Content Include="Views\Reviews\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

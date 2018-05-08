@@ -3,15 +3,24 @@
 @{
     Html.RenderPartial("_RestaurantDetail", Model.Restaurant);
 }
-
-@if (Model.Reviews == null)
-{
-    <span style="font-size:2em;">No reviews found.</span>
-}
-else
-{
-    foreach (var review in Model.Reviews)
+@Html.ActionLink("Create Review", "Create", new { id = Model.Restaurant.Id })
+<hr />
+<div>
+    @if (Model.Reviews == null || Model.Reviews.Count() == 0)
     {
-        Html.RenderPartial("_ReviewDetail", review); <br />
+        <span style="font-size:2em;">No reviews found.</span>
     }
-}
+    else
+    {
+        <h4>Reviews</h4>
+        <hr />
+        <table class="table">
+            @Html.Partial("_ReviewTableHeader", new DataAccessLayer.Models.Review())
+
+            @foreach (var review in Model.Reviews)
+            {
+                @Html.Partial("_ReviewDetail", review);
+            }
+        </table>
+    }
+</div>

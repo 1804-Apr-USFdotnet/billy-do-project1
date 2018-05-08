@@ -36,6 +36,11 @@ namespace RR.Web.Controllers
         public ActionResult Details(int id)
         {
             var rev = GetLibHelper().GetReview(id);
+            if (rev == null)
+            {
+                TempData["ReviewNull"] = true;
+                return RedirectToAction("Index");
+            }
 
             return View(rev);
         }
@@ -45,18 +50,23 @@ namespace RR.Web.Controllers
         {
             /* Show fields for creating a review
              */
+            ViewData["Restaurant"] = GetLibHelper().GetRestaurant(id);
             return View();
         }
 
         // POST: Reviews/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Review review)
         {
             try
             {
                 // TODO: Add insert logic here
+                review.RestaurantId = review.Id;
+                review.Id = 0;
+                GetLibHelper().CreateReview(review);
 
-                return RedirectToAction("Index");
+
+                return RedirectToAction("Details", new { id = review.Id });
             }
             catch
             {
@@ -94,7 +104,8 @@ namespace RR.Web.Controllers
             /* Ask if they want to delete review
              * Show review Details
              */
-            return View();
+            var review = GetLibHelper().GetReview(id);
+            return View(review);
         }
 
         // POST: Reviews/Delete/5
@@ -104,7 +115,7 @@ namespace RR.Web.Controllers
             try
             {
                 // TODO: Add delete logic here
-
+                GetLibHelper().DeleteReview(id);
                 return RedirectToAction("Index");
             }
             catch
@@ -127,6 +138,7 @@ namespace RR.Web.Controllers
             else if (reviewId != null && reviewId != "")
             {
                 // get Id, go to Details/Id
+                return RedirectToAction("Details", new { id = Convert.ToInt32(reviewId) });
             }
             return RedirectToAction("");
         }
@@ -136,9 +148,17 @@ namespace RR.Web.Controllers
         {
             // show restaurant detail
             var restaurant = GetLibHelper().GetRestaurant(id);
+            var result = restaurant.AverageRating;
             // get all reviews
-            IEnumerable<Review> reviews = restaurant.Reviews;
-            reviews = new List<Review>();
+            IEnumerable<Review> reviews;
+            try
+            {
+                reviews = restaurant.Reviews;
+            }
+            catch (NullReferenceException ex)
+            {
+                reviews = new List<Review>();
+            }
             // show all reviews
             var vmObj = new ReviewViewModel(restaurant, reviews);
 

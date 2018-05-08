@@ -1,9 +1,12 @@
 ﻿@model DataAccessLayer.Models.Restaurant
+@{
+    ViewBag.Title = "Restaurants";
+}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Restaurant</h4>
         <hr />

@@ -32,16 +32,20 @@ namespace DataAccessLayer.Models
         [Url]
         public string ImageUrl { get; set; }
 
-        public List<Review> Reviews { get; set; }
+        public virtual List<Review> Reviews { get; set; }
 
         public double AverageRating
         {
             get
             {
-                if (Reviews != null)
-                    return Reviews.Sum(x => x.Id) / Reviews.Count();
+                if (Reviews != null && Reviews.Count() > 0)
+                {
+                    return ((double) Reviews.Sum(x => x.Rating)) / Reviews.Count();
+                }
                 else
-                    return 0;
+                {
+                    return 0.0;
+                }
             }
         }
     }
