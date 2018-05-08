@@ -55,7 +55,8 @@ namespace RR.Web.Controllers
             {
                 //TODO Search is not working...
                 var r = GetLibHelper().SearchRestaurant(name);
-                return RedirectToAction("List", new { list =  r });
+                TempData["searchResults"] = r;
+                return RedirectToAction("List", "Restaurants", new { @list = r });
             }
             else
             {
@@ -180,6 +181,12 @@ namespace RR.Web.Controllers
         [HttpGet]
         public ActionResult List(IEnumerable<Restaurant> list)
         {
+            var searchResults = TempData["searchResults"];
+            if (searchResults != null)
+            {
+                list = (IEnumerable<Restaurant>)searchResults;
+            }
+
             string sortOption = Request["sort"];
             if (list == null)
             {

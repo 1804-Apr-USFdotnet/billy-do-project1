@@ -184,9 +184,7 @@ namespace RestaurantReviewsLibrary.Models
 
         public IEnumerable<Restaurant> GetTopRestaurants(int n)
         {
-            // TODO: implement new version
             return GetAllRestaurantsSortBy(SortBy.AverageDesc).Take(n);
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Restaurant> GetTopThreeRestaurants()
@@ -196,7 +194,6 @@ namespace RestaurantReviewsLibrary.Models
 
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
-            // TODO: implement new version
             return restRepo.FindAll();
         }
 
@@ -277,12 +274,10 @@ namespace RestaurantReviewsLibrary.Models
         {
             // TODO: implement new version
             StringComparison comparison = StringComparison.InvariantCultureIgnoreCase;
-            //restRepo.FindAll().ToList().FindAll(c => c.Name.StartsWith(searchQuery, comparison));
-            return restRepo.FindAll().ToList().FindAll(c => c.Name.StartsWith(searchQuery, comparison));
-            //throw new NotImplementedException();
-
-            //var obj = _myList.FindAll(c => c.Name.StartsWith(searchQuery, comparison));
-            //return obj;
+            //var list1 = restRepo.FindAll().Where(m => m.Name.Contains(searchQuery)).ToList();
+            //var list2 = restRepo.FindAll().ToList().FindAll(r => r.Name.ToLower().Contains(searchQuery)).ToList();
+            //var list3 = restRepo.FindAll().ToList().FindAll(c => c.Name.StartsWith(searchQuery, comparison));
+            return restRepo.FindAll().ToList().FindAll(r => r.Name.ToLower().Contains(searchQuery)).ToList();
         }
         #endregion
 
