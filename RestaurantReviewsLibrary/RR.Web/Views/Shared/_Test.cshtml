@@ -1,6 +1,25 @@
-﻿
+﻿@model List<DataAccessLayer.Models.Restaurant>
 @{
     ViewData["first"] = "first";
 }
 
-@ViewData["first"]
+<div class="row">
+    <div class="col-md-4">
+        <figure>
+            <img src="@Model[0].ImageUrl" alt="@Model[0].Name" height="200" />
+            <figcaption>@Model[0].Name - @Model[0].AverageRating</figcaption>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <img src="@Model[1].ImageUrl" alt="@Model[1].Name" height="200"  />
+            <figcaption>@Model[1].Name - @Model[1].AverageRating</figcaption>
+        </figure>
+    </div>
+    <div class="col-md-4">
+        <figure>
+            <img src="@Model[2].ImageUrl" alt="@Model[2].Name" height="200"  />
+            <figcaption>@Model[2].Name - @Model[2].AverageRating</figcaption>
+        </figure>
+    </div>
+</div>

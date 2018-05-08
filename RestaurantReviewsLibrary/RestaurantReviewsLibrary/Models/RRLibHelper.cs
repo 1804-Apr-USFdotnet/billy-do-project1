@@ -221,22 +221,22 @@ namespace RestaurantReviewsLibrary.Models
             switch (sortOption)
             {
                 case SortBy.NameAsc:
-                    list.OrderBy(x => x.Name);
+                    list = list.OrderBy(x => x.Name);
                     break;
                 case SortBy.NameDesc:
-                    list.OrderByDescending(x => x.Name);
+                    list = list.OrderByDescending(x => x.Name);
                     break;
                 case SortBy.ReviewCountAsc:
-                    list.OrderBy(x => x.Reviews.Count());
+                    list = list.OrderBy(x => x.Reviews.Count());
                     break;
                 case SortBy.ReviewCountDesc:
-                    list.OrderByDescending(x => x.Reviews.Count());
+                    list = list.OrderByDescending(x => x.Reviews.Count());
                     break;
                 case SortBy.AverageAsc:
-                    list.OrderBy(x => (x.AverageRating));
+                    list = list.OrderBy(x => (x.AverageRating));
                     break;
                 case SortBy.AverageDesc:
-                    list.OrderByDescending(x => (x.AverageRating));
+                    list = list.OrderByDescending(x => (x.AverageRating));
                     break;
                 default:
                     break;

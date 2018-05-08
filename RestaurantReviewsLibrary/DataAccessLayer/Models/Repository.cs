@@ -70,7 +70,6 @@ namespace DataAccessLayer.Models
 
         public void Update(TEntity entity)
         {
-            //TODO Other way of doing this?
             Entities.Attach(entity);
             _db.Entry(entity).State = EntityState.Modified;
             _db.SaveChanges();
